@@ -13,7 +13,7 @@ byFirst.addEventListener("input", function () {
   fetchData(byFirst.value, "firstChar");
 });
 // Navbar toggle
-// $(".main").animate({ paddingLeft: navLeftWidth }, 300);
+$(".main").animate({ paddingLeft: navLeftWidth }, 300);
 $(".nav").animate({ left: -navLeftWidth }, 300);
 $(".icon-toggle i").click(function () {
   let navLeftWidth = $(".nav-right").innerWidth();
