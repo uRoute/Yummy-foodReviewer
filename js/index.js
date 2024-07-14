@@ -110,6 +110,13 @@ async function fetchData(searchKey, apiKey) {
     displayAreas(dataJson.meals.slice(0, 24));
   } 
 }
+// Fetch Details Data
+async function fetchDetails(id){
+  let api = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  let data  = await fetch(api);
+  let dataJson = await data.json();
+  console.log(dataJson.meals);
+}
 // Displays
 function displayMeals(data) {
   data = data.slice(0, 20);
@@ -118,7 +125,7 @@ function displayMeals(data) {
   for (let i = 0; i < data.length; i++) {
     box += `
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
-                    <div class="item">
+                    <div data-id="${data[i].idMeal}" class="item">
                         <img class="w-100 data-image" src='${data[i].strMealThumb}' alt="">
                          <div class="img-layer">
                             <h2>${data[i].strMeal}</h2>
@@ -128,6 +135,16 @@ function displayMeals(data) {
             `;
   }
   document.getElementById("mainData").innerHTML = box;
+
+    
+let items = Array.from(document.querySelectorAll('.item'))
+console.log(items);
+for(let i = 0 ; i < items.length ; i++){
+  items[i].addEventListener('click',function(){
+    console.log(items[i].getAttribute('data-id'));
+    fetchDetails(items[i].getAttribute('data-id'))
+  })
+}
 }
 function displayCategories(data) {
   data = data.slice(0, 20);
@@ -153,6 +170,7 @@ function displayCategories(data) {
               `;
   }
   document.getElementById("mainData").innerHTML = box;
+  
 }
 function displayIngredients(data) {
   box = ``;
@@ -192,6 +210,12 @@ function displayAreas(data) {
                 `;
     }
     document.getElementById("mainData").innerHTML = box;
-  }
-  
+}
+function displayDetails(){ 
+  let box = ``;
+
+
+
+}
+
 fetchData("",'home');
