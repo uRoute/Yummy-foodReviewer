@@ -69,13 +69,28 @@ for (let i = 0; i < navLinks.length; i++) {
 async function fetchData(searchKey, apiKey) {
   let api = ``;
 
-  if (searchKey) {
+  if (searchKey ) {
     if (apiKey && apiKey == "name") {
       api = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchKey}`;
+      let data = await fetch(api);
+      let dataJson = await data.json();
+      console.log(dataJson.meals);
+      displayMeals(dataJson.meals);
     } else if (apiKey && apiKey == "firstChar") {
       api = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchKey}`;
+      let data = await fetch(api);
+      let dataJson = await data.json();
+      console.log(dataJson.meals);
+      displayMeals(dataJson.meals);
     }
-  } else if (apiKey && apiKey == "category") {
+  }
+  if (apiKey && apiKey == "home") {
+    api = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
+    let data = await fetch(api);
+    let dataJson = await data.json();
+    console.log(dataJson.meals);
+    displayMeals(dataJson.meals);
+  }else if (apiKey && apiKey == "category") {
     api = `https://www.themealdb.com/api/json/v1/1/categories.php`;
     let data = await fetch(api);
     let dataJson = await data.json();
@@ -93,13 +108,7 @@ async function fetchData(searchKey, apiKey) {
     let dataJson = await data.json();
     console.log(dataJson.meals.slice(0, 25));
     displayAreas(dataJson.meals.slice(0, 24));
-  } else {
-    api = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
-    let data = await fetch(api);
-    let dataJson = await data.json();
-    console.log(dataJson.meals);
-    displayMeals(dataJson.meals);
-  }
+  } 
 }
 // Displays
 function displayMeals(data) {
