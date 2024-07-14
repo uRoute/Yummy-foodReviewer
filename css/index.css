@@ -13,6 +13,7 @@ body{
 }
 .nav-left{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem;
@@ -39,6 +40,7 @@ body{
     padding: 1rem 0;
 }
 .nav-right ul li a {
+    cursor: pointer;
     color: #fff !important;
 }
 .nav-right ul li a.active{
@@ -50,14 +52,38 @@ body{
 .nav-right ul{
     text-align: center;
 }
+.nav-social{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .item{
     position: relative;
     overflow: hidden;
     border-radius: 5%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ;
     -webkit-border-radius: 5%;
     -moz-border-radius: 5%;
     -ms-border-radius: 5%;
     -o-border-radius: 5%;
+    -webkit-transition: all 0.3s ;
+    -moz-transition: all 0.3s ;
+    -ms-transition: all 0.3s ;
+    -o-transition: all 0.3s ;
+}
+.ingred{
+    height: 300px;
+}
+.ingred i {
+    font-size: 3rem;
+    padding: 1rem;
+}
+.item:hover{
+    box-shadow: 0px 0px 30px lightblue;
+   
 }
 .item:hover .img-layer{
     top: 0;
@@ -66,18 +92,34 @@ body{
     font-family: "Playwrite DK Uloopet", cursive;
     cursor: pointer;
     position: absolute;
-    top: 120%;
+    top: 160%;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: rgba(255, 255, 255, 0.9);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: lightslategray;
+    padding: 0.5rem;
     transition: all 0.3s;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
+}
+.search-inputs{
+    display: flex;
+    gap: 2rem;
+}
+.form-floating{
+    width: 50%;
+    color: #fff !important;
+}
+.form-floating input{
+    border: none;
+    border-bottom: 3px solid #fff;
+    background-color: transparent !important;
+    color: #fff !important;
 }

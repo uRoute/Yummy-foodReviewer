@@ -15,35 +15,34 @@
     <!------------------------ Navbar ------------------------------->
     <nav class="nav">
         <div class="container d-flex p-0">
-           
+
             <div class="nav-right p-5">
                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" aria-current="page">Home
-                            <span class="visually-hidden">(current)</span></a>
+                        <a class="nav-link active" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Search">Search</a>
+                        <a class="nav-link">Search</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Categories">Categories</a>
+                        <a class="nav-link">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Area">Area</a>
+                        <a class="nav-link">Area</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Ingredients">Ingredients</a>
+                        <a class="nav-link">Ingredients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Contact">Contact Us</a>
-                    </li> 
+                        <a class="nav-link">Contact Us</a>
+                    </li>
                 </ul>
             </div>
             <div class="nav-icon text-center bg-light">
                 <div class="nav-left">
                     <img class="nav-logo" src="images/fast-food.png" alt="Food logo">
-                    <a class="navbar-brand" href="#">Yummy</a>
-                </div>    
+                    <a class="navbar-brand">Yummy</a>
+                </div>
                 <div class="icon-toggle fs-3">
                     <i class="fa-solid fa-sliders"></i>
                 </div>
@@ -56,9 +55,25 @@
             </div>
         </div>
     </nav>
+    <!------------------------ Search ------------------------------->
+
+    <section id="searchSection" class="search main d-none">
+        <div class="container">
+            <div class="search-inputs">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="byFirst" placeholder="byFirst">
+                    <label for="floatingInput">Search by First Character ...</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="byName" placeholder="byName">
+                    <label for="floatingInput">Search by Name ...</label>
+                </div>
+            </div>
+        </div>
+    </section>
     <!------------------------ Home ------------------------------->
 
-    <section class="home">
+    <section id="homeSection" class="home main">
         <div class="container">
             <div class="row" id="mainData">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-3">
@@ -69,14 +84,27 @@
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
         </div>
     </section>
 
-
-
+    <!-- -----------------Categories----------------------------- -->
+    <section id="CategoriesSection" class="categories main d-none">
+        <div class="container">
+            <div class="row" id="categoryData">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+                    <div class="item">
+                        <img class="w-100" src="images/fast-food.png" alt="">
+                        <div class="img-layer">
+                            <h2>lorem</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
