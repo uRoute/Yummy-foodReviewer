@@ -69,7 +69,7 @@ for (let i = 0; i < navLinks.length; i++) {
 async function fetchData(searchKey, apiKey) {
   let api = ``;
 
-  if (searchKey && apiKey && apiKey == 'home') {
+  if (searchKey) {
     if (apiKey && apiKey == "name") {
       api = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchKey}`;
     } else if (apiKey && apiKey == "firstChar") {
