@@ -18,23 +18,23 @@
 
             <div class="nav-right p-5">
                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item my-2">
                         <a class="nav-link active" aria-current="page">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item my-2">
                         <a class="nav-link">Search</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item my-2">
                         <a class="nav-link">Categories</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item my-2">
                         <a class="nav-link">Area</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item my-2">
                         <a class="nav-link">Ingredients</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">Contact Us</a>
+                    <li class="nav-item my-2">
+                        <a class="nav-link">Contact-Us</a>
                     </li>
                 </ul>
             </div>
@@ -92,7 +92,44 @@
             </div>
         </div>
     </section>
-
+    <!-- ----------------------- Contact US--------------------------- -->
+    <section id="contact" class="contact main d-none">
+        <div class="container ">
+            <form class="py-4">
+                <div class="row m-0">
+                    <div class="col-12 col-md-6 ">
+                        <div class="form-floating w-100">
+                            <input type="text" class="form-control" id="name" placeholder="name">
+                            <label for="floatingInput">Name</label>
+                        </div>
+                        <div class="form-floating w-100">
+                            <input type="email" class="form-control" id="email" placeholder="email">
+                            <label for="floatingInput">Email</label>
+                        </div>
+                        <div class="form-floating w-100">
+                            <input type="number" class="form-control" id="age" placeholder="age">
+                            <label for="floatingInput">Age</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 ">
+                        <div class="form-floating w-100">
+                            <input type="number" class="form-control" id="phone" placeholder="phone">
+                            <label for="floatingInput">Phone</label>
+                        </div>
+                        <div class="form-floating w-100">
+                            <input type="password" class="form-control" id="password" placeholder="password">
+                            <label for="floatingInput">Password</label>
+                        </div>
+                        <div class="form-floating w-100">
+                            <input type="password" class="form-control" id="repassword" placeholder="password">
+                            <label for="floatingInput">Confirm Password</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-danger p-3 text-white ps-3 rounded rounded-pill d-block mx-auto w-50 my-4">Submit</button>
+            </form>
+        </div>
+    </section>
 
 
     <script src="js/bootstrap.bundle.min.js"></script>

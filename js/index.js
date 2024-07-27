@@ -4,11 +4,12 @@ let byName = document.getElementById("byName");
 let navLeftWidth = $(".nav-right").innerWidth();
 let navRightWidth = $(".nav-icon").innerWidth();
 let navWidth = $(".nav").innerWidth();
-let closeDetails = document.querySelector('#closeDetails')
-closeDetails.addEventListener('click', function(){
+let closeDetails = document.querySelector("#closeDetails");
+
+closeDetails.addEventListener("click", function () {
   document.getElementById("mealDetails").classList.add("d-none");
   document.getElementById("homeSection").classList.remove("d-none");
-})
+});
 console.log(navLeftWidth);
 byName.addEventListener("input", function () {
   // console.log(byFirst.value);
@@ -70,6 +71,15 @@ for (let i = 0; i < navLinks.length; i++) {
       $(".main").animate({ paddingLeft: navRightWidth }, 300);
       fetchData("", "area");
     }
+    if (navLinks[i].innerHTML == "Contact-Us") {
+      document.getElementById("searchSection").classList.add("d-none");
+      document.getElementById("contact").classList.remove("d-none");
+      document.getElementById("homeSection").classList.add("d-none");
+
+      $(".nav").animate({ left: -navLeftWidth }, 500);
+      $(".main").animate({ paddingLeft: navRightWidth }, 300);
+      
+    }
   });
 }
 
@@ -119,28 +129,28 @@ async function fetchData(searchKey, apiKey) {
     displayAreas(dataJson.meals.slice(0, 24));
   }
 
-  if(searchKey && apiKey=='categorymeals'){
+  if (searchKey && apiKey == "categorymeals") {
     console.log(searchKey);
     api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchKey}`;
     let data = await fetch(api);
     let dataJson = await data.json();
     console.log(dataJson.meals.slice(0, 25));
-    displayMeals(dataJson.meals.slice(0, 25))
-  }else if(searchKey && apiKey=='areaMeal'){
+    displayMeals(dataJson.meals.slice(0, 25));
+  } else if (searchKey && apiKey == "areaMeal") {
     console.log(searchKey);
     api = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchKey}`;
     let data = await fetch(api);
     let dataJson = await data.json();
     console.log(dataJson.meals.slice(0, 25));
-    displayMeals(dataJson.meals.slice(0, 25))
-  }else if(searchKey && apiKey=='ingrediantsMeal'){
+    displayMeals(dataJson.meals.slice(0, 25));
+  } else if (searchKey && apiKey == "ingrediantsMeal") {
     console.log(searchKey);
     // www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast
     api = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchKey}`;
     let data = await fetch(api);
     let dataJson = await data.json();
     console.log(dataJson);
-    displayMeals(dataJson.meals.slice(0, 25))
+    displayMeals(dataJson.meals.slice(0, 25));
   }
 }
 // Fetch Details Data
@@ -208,7 +218,7 @@ function displayCategories(data) {
   for (let i = 0; i < items.length; i++) {
     items[i].addEventListener("click", function () {
       console.log(items[i].getAttribute("data-id"));
-      fetchData(items[i].getAttribute("data-id"),'categorymeals');
+      fetchData(items[i].getAttribute("data-id"), "categorymeals");
     });
   }
 }
@@ -219,7 +229,9 @@ function displayIngredients(data) {
   for (let i = 0; i < data.length; i++) {
     box += `
                   <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
-                      <div data-id="${data[i].strIngredient}" class="item ingred">
+                      <div data-id="${
+                        data[i].strIngredient
+                      }" class="item ingred">
                           <i class="fa-solid fa-utensils" style="color: #B197FC;"></i>
                               <h2>${data[i].strIngredient}</h2>
                            <div class="img-layer">
@@ -236,13 +248,12 @@ function displayIngredients(data) {
 
   let items = Array.from(document.querySelectorAll(".item"));
   console.log(items);
-  for (let i = 0; i < items.length ; i++) {
+  for (let i = 0; i < items.length; i++) {
     items[i].addEventListener("click", function () {
       console.log(items[i].getAttribute("data-id"));
-      fetchData(items[i].getAttribute("data-id"),'ingrediantsMeal');
+      fetchData(items[i].getAttribute("data-id"), "ingrediantsMeal");
     });
   }
-  
 }
 function displayAreas(data) {
   box = ``;
@@ -265,7 +276,7 @@ function displayAreas(data) {
   for (let i = 0; i < items.length; i++) {
     items[i].addEventListener("click", function () {
       console.log(items[i].getAttribute("data-id"));
-      fetchData(items[i].getAttribute("data-id"),'areaMeal');
+      fetchData(items[i].getAttribute("data-id"), "areaMeal");
     });
   }
 }
@@ -275,19 +286,23 @@ function displayDetails(data) {
 
   let box = ``;
   let tags = [];
-  let strMeasures = []
+  let strMeasures = [];
   // datastrIngredient = [];
-  
+
   for (let i = 0; i <= 19; i++) {
-    if (data[`strIngredient${i}`] && data[`strIngredient${i}`] != undefined && data[`strMeasure${i}`] && data[`strMeasure${i}`] != undefined) {
+    if (
+      data[`strIngredient${i}`] &&
+      data[`strIngredient${i}`] != undefined &&
+      data[`strMeasure${i}`] &&
+      data[`strMeasure${i}`] != undefined
+    ) {
       // console.log(data[`strIngredient${i}`]);
-      tags.push(data[`strIngredient${i}`])
-      strMeasures.push(data[`strMeasure${i}`])
-      
+      tags.push(data[`strIngredient${i}`]);
+      strMeasures.push(data[`strMeasure${i}`]);
     }
   }
-  let allTags = tags.toString()
-  let strMeasure = strMeasures.toString()
+  let allTags = tags.toString();
+  let strMeasure = strMeasures.toString();
   // console.log(allTags);
 
   // for (let y = 0; y <= 19; y++) {
