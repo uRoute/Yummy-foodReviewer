@@ -2,8 +2,14 @@ let navLinks = Array.from(document.querySelectorAll(".nav-link"));
 let byFirst = document.getElementById("byFirst");
 let byName = document.getElementById("byName");
 let navLeftWidth = $(".nav-right").innerWidth();
-let navRightWidth = $(".nav-left").innerWidth();
+let navRightWidth = $(".nav-icon").innerWidth();
 let navWidth = $(".nav").innerWidth();
+let closeDetails = document.querySelector('#closeDetails')
+closeDetails.addEventListener('click', function(){
+  document.getElementById("mealDetails").classList.add("d-none");
+  document.getElementById("homeSection").classList.remove("d-none");
+})
+console.log(navLeftWidth);
 byName.addEventListener("input", function () {
   // console.log(byFirst.value);
   fetchData(byName.value, "name");
@@ -13,10 +19,12 @@ byFirst.addEventListener("input", function () {
   fetchData(byFirst.value, "firstChar");
 });
 // Navbar toggle
-$(".main").animate({ paddingLeft: navLeftWidth }, 300);
+$(".main").animate({ paddingLeft: navRightWidth }, 300);
 $(".nav").animate({ left: -navLeftWidth }, 300);
 $(".icon-toggle i").click(function () {
   let navLeftWidth = $(".nav-right").innerWidth();
+  console.log(navLeftWidth);
+
   // console.log(navLeftWidth);
   if ($(".nav").css("left") == "0px") {
     $(".nav").animate({ left: -navLeftWidth }, 500);
@@ -69,7 +77,7 @@ for (let i = 0; i < navLinks.length; i++) {
 async function fetchData(searchKey, apiKey) {
   let api = ``;
 
-  if (searchKey ) {
+  if (searchKey) {
     if (apiKey && apiKey == "name") {
       api = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchKey}`;
       let data = await fetch(api);
@@ -90,7 +98,7 @@ async function fetchData(searchKey, apiKey) {
     let dataJson = await data.json();
     console.log(dataJson.meals);
     displayMeals(dataJson.meals);
-  }else if (apiKey && apiKey == "category") {
+  } else if (apiKey && apiKey == "category") {
     api = `https://www.themealdb.com/api/json/v1/1/categories.php`;
     let data = await fetch(api);
     let dataJson = await data.json();
@@ -108,14 +116,15 @@ async function fetchData(searchKey, apiKey) {
     let dataJson = await data.json();
     console.log(dataJson.meals.slice(0, 25));
     displayAreas(dataJson.meals.slice(0, 24));
-  } 
+  }
 }
 // Fetch Details Data
-async function fetchDetails(id){
+async function fetchDetails(id) {
   let api = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  let data  = await fetch(api);
+  let data = await fetch(api);
   let dataJson = await data.json();
   console.log(dataJson.meals);
+  displayDetails(dataJson.meals[0]);
 }
 // Displays
 function displayMeals(data) {
@@ -136,15 +145,14 @@ function displayMeals(data) {
   }
   document.getElementById("mainData").innerHTML = box;
 
-    
-let items = Array.from(document.querySelectorAll('.item'))
-console.log(items);
-for(let i = 0 ; i < items.length ; i++){
-  items[i].addEventListener('click',function(){
-    console.log(items[i].getAttribute('data-id'));
-    fetchDetails(items[i].getAttribute('data-id'))
-  })
-}
+  let items = Array.from(document.querySelectorAll(".item"));
+  console.log(items);
+  for (let i = 0; i < items.length; i++) {
+    items[i].addEventListener("click", function () {
+      console.log(items[i].getAttribute("data-id"));
+      fetchDetails(items[i].getAttribute("data-id"));
+    });
+  }
 }
 function displayCategories(data) {
   data = data.slice(0, 20);
@@ -170,7 +178,6 @@ function displayCategories(data) {
               `;
   }
   document.getElementById("mainData").innerHTML = box;
-  
 }
 function displayIngredients(data) {
   box = ``;
@@ -195,11 +202,11 @@ function displayIngredients(data) {
   document.getElementById("mainData").innerHTML = box;
 }
 function displayAreas(data) {
-    box = ``;
-    // console.log(data.length);
-    // console.log(data[2].strCategoryDescription.split(' ').slice(0,20));
-    for (let i = 0; i < data.length; i++) {
-      box += `
+  box = ``;
+  // console.log(data.length);
+  // console.log(data[2].strCategoryDescription.split(' ').slice(0,20));
+  for (let i = 0; i < data.length; i++) {
+    box += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
                         <div class="item ingred">
                             <i class="fa-solid fa-chart-area" style="color: #B197FC;"></i>
@@ -208,14 +215,75 @@ function displayAreas(data) {
                         </div>
                     </div>
                 `;
-    }
-    document.getElementById("mainData").innerHTML = box;
+  }
+  document.getElementById("mainData").innerHTML = box;
 }
-function displayDetails(){ 
+function displayDetails(data) {
+  document.getElementById("mealDetails").classList.remove("d-none");
+  document.getElementById("homeSection").classList.add("d-none");
+
   let box = ``;
+  let tags = [];
+  let strMeasures = []
+  // datastrIngredient = [];
+  
+  for (let i = 0; i <= 19; i++) {
+    if (data[`strIngredient${i}`] && data[`strIngredient${i}`] != undefined && data[`strMeasure${i}`] && data[`strMeasure${i}`] != undefined) {
+      // console.log(data[`strIngredient${i}`]);
+      tags.push(data[`strIngredient${i}`])
+      strMeasures.push(data[`strMeasure${i}`])
+      
+    }
+  }
+  let allTags = tags.toString()
+  let strMeasure = strMeasures.toString()
+  // console.log(allTags);
 
+  // for (let y = 0; y <= 19; y++) {
+  //   datastrIngredient[y] = `strIngredient${y + 1}`;
+  // }
+  // strIngredient1
+  // strIngredient1
+  // console.log(datastrIngredient);
+  // data.datastrIngredient[0]
+  // for (let o = 0 ; o < datastrIngredient.length ; o++) {
+  //   ingrediant = datastrIngredient[o];
+  //   // console.log(ingrediant);
+  //   console.log(data.ingrediant);
+  //   // if (data.ingrediant) {
+  //   //   tags.push(ingrediant);
+  //   //   console.log(tags);
+  //   // }
+  // }
+  box += `
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+                    <div class="mealDeatils-image">
+                        <img class="w-100" src="${data.strMealThumb}" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-9">
+                    <div class="mealDeatils-desc">
+                        <h2>Instructions</h2>
+                        <p>${data.strInstructions}</p>
+                        <h2>Area : <span>${data.strArea}</span></h2>
+                        <h2>Category : <span>${data.strCategory}</span></h2>
+                        <h2>Recipes :</h2>
+                        <ul class="list-unstyled">
+                            <li class="alert alert-danger my-2 p-2">${allTags}</li>
 
-
+                        </ul>
+                        <h2>Tags :</h2>
+                        <p class="alert alert-info my-2 p-2">
+                        ${strMeasure}
+                        </p>
+                        <div class="details-buttons">
+                            <button class="btn btn-outline-danger"><a href="${data.strYoutube}" target="_blank">Youtube</a></button>
+                            <button class="btn btn-outline-success"><a href="${data.strSource}" target="_blank">Source</a></button>
+                        </div>
+                    </div>
+                </div>
+  `;
+  document.getElementById("mealDetail").innerHTML = box;
 }
 
-fetchData("",'home');
+fetchData("", "home");

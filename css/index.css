@@ -2,7 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DK+Uloopet:wght@100..400&display=swap');
 body{
     font-family: "Oswald", sans-serif;
-    background-color: #0c1633;
+    background-color: #0c1633; 
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+ul{
+    list-style: none;
 }
 .nav{
     height: 100vh;
@@ -10,6 +17,7 @@ body{
     left: 0;
     top: 0;
     bottom: 0;
+    z-index: 9999;
 }
 .nav-left{
     display: flex;
@@ -122,4 +130,23 @@ body{
     border-bottom: 3px solid #fff;
     background-color: transparent !important;
     color: #fff !important;
+}
+
+.details{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background-color: #0c1633;
+    color: #fff;
+}
+.close-btn i{
+    cursor: pointer;
+}
+.details-buttons button{
+    padding: 0.7rem !important;
+    font-size: 20px;
+
 }
