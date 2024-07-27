@@ -92,6 +92,7 @@ async function fetchData(searchKey, apiKey) {
       displayMeals(dataJson.meals);
     }
   }
+  // https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
   if (apiKey && apiKey == "home") {
     api = `https://www.themealdb.com/api/json/v1/1/search.php?s=`;
     let data = await fetch(api);
@@ -116,6 +117,30 @@ async function fetchData(searchKey, apiKey) {
     let dataJson = await data.json();
     console.log(dataJson.meals.slice(0, 25));
     displayAreas(dataJson.meals.slice(0, 24));
+  }
+
+  if(searchKey && apiKey=='categorymeals'){
+    console.log(searchKey);
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchKey}`;
+    let data = await fetch(api);
+    let dataJson = await data.json();
+    console.log(dataJson.meals.slice(0, 25));
+    displayMeals(dataJson.meals.slice(0, 25))
+  }else if(searchKey && apiKey=='areaMeal'){
+    console.log(searchKey);
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchKey}`;
+    let data = await fetch(api);
+    let dataJson = await data.json();
+    console.log(dataJson.meals.slice(0, 25));
+    displayMeals(dataJson.meals.slice(0, 25))
+  }else if(searchKey && apiKey=='ingrediantsMeal'){
+    console.log(searchKey);
+    // www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast
+    api = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchKey}`;
+    let data = await fetch(api);
+    let dataJson = await data.json();
+    console.log(dataJson);
+    displayMeals(dataJson.meals.slice(0, 25))
   }
 }
 // Fetch Details Data
@@ -162,7 +187,7 @@ function displayCategories(data) {
   for (let i = 0; i < data.length; i++) {
     box += `
                   <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
-                      <div class="item">
+                      <div data-id="${data[i].strCategory}" class="item">
                           <img class="w-100 data-image" src='${
                             data[i].strCategoryThumb
                           }' alt="">
@@ -178,6 +203,14 @@ function displayCategories(data) {
               `;
   }
   document.getElementById("mainData").innerHTML = box;
+  let items = Array.from(document.querySelectorAll(".item"));
+  console.log(items);
+  for (let i = 0; i < items.length; i++) {
+    items[i].addEventListener("click", function () {
+      console.log(items[i].getAttribute("data-id"));
+      fetchData(items[i].getAttribute("data-id"),'categorymeals');
+    });
+  }
 }
 function displayIngredients(data) {
   box = ``;
@@ -186,7 +219,7 @@ function displayIngredients(data) {
   for (let i = 0; i < data.length; i++) {
     box += `
                   <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
-                      <div class="item ingred">
+                      <div data-id="${data[i].strIngredient}" class="item ingred">
                           <i class="fa-solid fa-utensils" style="color: #B197FC;"></i>
                               <h2>${data[i].strIngredient}</h2>
                            <div class="img-layer">
@@ -200,6 +233,16 @@ function displayIngredients(data) {
               `;
   }
   document.getElementById("mainData").innerHTML = box;
+
+  let items = Array.from(document.querySelectorAll(".item"));
+  console.log(items);
+  for (let i = 0; i < items.length ; i++) {
+    items[i].addEventListener("click", function () {
+      console.log(items[i].getAttribute("data-id"));
+      fetchData(items[i].getAttribute("data-id"),'ingrediantsMeal');
+    });
+  }
+  
 }
 function displayAreas(data) {
   box = ``;
@@ -208,7 +251,7 @@ function displayAreas(data) {
   for (let i = 0; i < data.length; i++) {
     box += `
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-2">
-                        <div class="item ingred">
+                        <div data-id="${data[i].strArea}" class="item ingred">
                             <i class="fa-solid fa-chart-area" style="color: #B197FC;"></i>
                                 <h2>${data[i].strArea}</h2>
                             
@@ -217,6 +260,14 @@ function displayAreas(data) {
                 `;
   }
   document.getElementById("mainData").innerHTML = box;
+  let items = Array.from(document.querySelectorAll(".item"));
+  console.log(items);
+  for (let i = 0; i < items.length; i++) {
+    items[i].addEventListener("click", function () {
+      console.log(items[i].getAttribute("data-id"));
+      fetchData(items[i].getAttribute("data-id"),'areaMeal');
+    });
+  }
 }
 function displayDetails(data) {
   document.getElementById("mealDetails").classList.remove("d-none");
